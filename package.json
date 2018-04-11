@@ -1,0 +1,21 @@
+{
+  "name": "discord",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "discord.io": "^2.5.3",
+    "discord.js": "^11.3.2",
+    "mongodb": "^3.0.6",
+    "request": "^2.85.0",
+    "winston": "^2.4.1",
+    "xml2js": "^0.4.19"
+  }
+}
