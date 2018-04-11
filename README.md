@@ -44,8 +44,35 @@ ANSWER
 ```
 to write a quiz. Hasshi-bot will respond with a quiz code.  
 `?quiz CODE` will print out the quiz question  
-DM `?answer CODE` will print out the quiz answer 
-
+DM `?answer CODE` will print out the quiz answer  
+#### Example
+```
+[IN A DM]
+?write quiz
+Who is Richard's Favourite Seiyuu?
+a. Ari Ozawa
+b. Kana Hanazawa
+c. Ohashi Ayaka
+d. Minami Tsuda
+e. Ookubo Rumi
+?answer
+c. Ohashi Ayaka
+[RESPONSE]
+Quiz code: 5acd9360fb18104e1cecc274
+[IN A TEXTCHANNEL]
+?quiz 5acd9360fb18104e1cecc274
+[RESPONSE]
+Who is Richard's Favourite Seiyuu?
+a. Ari Ozawa
+b. Kana Hanazawa
+c. Ohashi Ayaka
+d. Minami Tsuda
+e. Ookubo Rumi
+[IN A DM]
+?answer 5acd9360fb18104e1cecc274
+[RESPONSE]
+c. Ohashi Ayaka
+```
 ## OTHER
 `?lewd` will spam `lewd` in chat  
 
