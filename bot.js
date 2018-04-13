@@ -134,10 +134,16 @@ bot.on('message', message => {
 								} else{
 										imglink = body.match("safebooru.org\/images\/[^\"]*\"");
 										imglink = "http://"+imglink[0].slice(0,-1);
-										if (body.search("shimamura_uzuki") == -1)
-												message.channel.send({files: [imglink]});
-										else
-												message.channel.send("Congrats! You got an Uzuki!",{files:[imglink]});				
+										if (body.search("shimamura_uzuki") == -1){
+												message.channel.send({files: [imglink]}).catch(function(error){
+														message.channel.send("File too big! Sorry about that; try again");
+												});
+										}
+										else{
+												message.channel.send("Congrats! You got an Uzuki!",{files:[imglink]}).catch(function(error){
+														message.channel.send("File too big! Sorry about that; try again");
+												});
+										}
 								}
 								
 						});
@@ -355,6 +361,9 @@ bot.on('message', message => {
 				message.channel.send("<3");
 		} else if (message.content.substring().toLowerCase() == "let's go" || message.content.substring().toLowerCase() == "lets go"){
 				message.channel.send("L E T S G O");
+		} else if (message.content.substring().toLowerCase() == 'da'){
+				message.delete();
+				message.channel.send("да");
 		} 
 });
 
