@@ -338,7 +338,7 @@ bot.on('message', message => {
 																if (item.my_status[0] == '1' && (!args.includes('airing') || is_airing(item.series_end[0])) && (!args.includes('nonairing') || !is_airing(item.series_end[0]))){
 																		finalmessage += "__**"+item.series_title[0] + "**__\nScore: " + item.my_score[0] + " Episodes: " + item.my_watched_episodes[0] + "/" + item.series_episodes[0] + "\n";
 																		if (args.includes('link')){
-																				finalmessage += "https://myanimelist.net/anime/"+item.series_animedb_id[0]+"\n";
+																				finalmessage += "<https://myanimelist.net/anime/"+item.series_animedb_id[0]+">\n";
 																		}
 																}
 														}).then(function(){
