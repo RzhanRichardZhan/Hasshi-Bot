@@ -73,6 +73,10 @@ e. Ookubo Rumi
 [RESPONSE]
 c. Ohashi Ayaka
 ```
+## EMOTES
+(REQUIRES PERMISSIONS) To submit an emote `?postemote EMOTENAME` with a file attachment  
+To use an emote `?emote EMOTENAME`  
+To see a list of emotes `?emotelist`  
 ## OTHER
 `?lewd` will spam `lewd` in chat  
 
