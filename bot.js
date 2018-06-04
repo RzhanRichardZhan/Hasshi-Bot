@@ -6,6 +6,7 @@ var parseString = require('xml2js').parseString;
 var Promise = require('bluebird');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
+var fs = require('fs');
 // keys
 var GoogleKey = auth.GoogleKey;
 var cx = auth.cx;
@@ -30,6 +31,12 @@ bot.on('ready', function (evt) {
 function is_airing(s){
 		return s.substring(5,10) == '00-00'; 
 }
+
+var download = function(uri, filename, callback){
+		request.head(uri, function(err, res, body){
+				request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+		});
+};
 
 const help_error = " Type `?help` for help.";
 
@@ -121,6 +128,52 @@ bot.on('message', message => {
 								}); 
 						}
 
+				}
+				else if (cmd == 'postEmote'){
+						if (!message.author.id in auth.users){
+								message.channel.send("Access Denied");
+						}
+						else if (args.length == 0){
+								message.channel.send("Please specify an emote name." + help_error); 
+						} else if (message.attachments.array().length == 0) {
+								message.channel.send("Please provide an image." + help_error);
+						} else {
+								const emoteFile = message.attachments.first();
+								const fileName = args[0] + '.png';
+								download(emoteFile.url, `./emotes/${fileName}`, function(){
+										message.channel.send("Success!");
+								});
+						}
+				}
+				else if (cmd == 'emote'){
+						if (args.length == 0){
+								message.channel.send("Please specify an emote name." + help_error);
+						} else {
+								const fileName = './emotes/'+ args[0] + '.png';
+								message.channel.send({
+										files: [{
+												attachment: fileName,
+												name: args[0] + '.png'
+										}]
+								})
+								.catch(e => {
+										message.channel.send("Invalid emote!");
+								});
+						} 
+				}
+				else if (cmd == 'emoteList'){
+						let allNames = "";
+						fs.readdir('./emotes/', (err, files) => {
+								if (files.length > 1000){
+										message.channel.send("TOO MANY EMOTES D:");
+										return;
+								}
+								files.forEach(file => {
+										allNames += file.substring(0, file.length - 4) + '\n';
+								});
+								message.channel.send(allNames);
+						
+						});
 				}
 				else if (cmd == 'imas'){
 						// get a random page (may exclude really old ones)
@@ -303,6 +356,8 @@ bot.on('message', message => {
 				}
 		}
 		else if (message.content.substring(0, 1) == '!' && message != '!') {
+				message.channel.send("This feature doesn't work anymore :(");
+				return;
 				var args = message.content.substring(1).split(' ');
 				var cmd = args[0];
 				
